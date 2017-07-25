@@ -28,12 +28,18 @@ public class TennisGame1 implements TennisGame {
         } else if (isDuece()) {
             score = "Deuce";
         } else if (isAdvantage()) {
-            if (minusResult == 1) score = "Advantage " + this.player1Name;
-            else if (minusResult == -1) score = "Advantage " + this.player2Name;
+            if (minusResult == 1) {
+                score = "Advantage " + this.player1Name;
+            } else if (minusResult == -1) {
+                score = "Advantage " + this.player2Name;
+            }
         } else if (isWinner()) {
-            if (minusResult >= 2) score = "Win for player1";
-            else score = "Win for player2";
-        }else if (normal()) {
+            if (minusResult >= 2) {
+                score = "Win for " + this.player1Name;
+            } else {
+                score = "Win for " + this.player2Name;
+            }
+        } else if (normal()) {
             if (m_score1 == m_score2) {
                 switch (m_score1) {
                     case 1:
@@ -43,7 +49,7 @@ public class TennisGame1 implements TennisGame {
                         score = "Thirty-All";
                         break;
                 }
-            }else{
+            } else {
                 for (int i = 1; i < 3; i++) {
                     if (i == 1) tempScore = m_score1;
                     else {
