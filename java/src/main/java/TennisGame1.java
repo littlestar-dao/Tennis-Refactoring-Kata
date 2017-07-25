@@ -13,7 +13,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
+        if ("player1".equals(playerName) )
             m_score1 += 1;
         else
             m_score2 += 1;
@@ -21,8 +21,8 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score = "";
-        int tempScore = 0;
         int minusResult = m_score1 - m_score2;
+
         if (m_score1 == 0 && m_score2 == 0) {
             return "Love-All";
         } else if (isDuece()) {
@@ -40,37 +40,12 @@ public class TennisGame1 implements TennisGame {
                 score = "Win for " + this.player2Name;
             }
         } else if (normal()) {
+            String scoreA = convertScoreToString(m_score1);
+            String scoreB = convertScoreToString(m_score2);
             if (m_score1 == m_score2) {
-                switch (m_score1) {
-                    case 1:
-                        score = "Fifteen-All";
-                        break;
-                    case 2:
-                        score = "Thirty-All";
-                        break;
-                }
+                return scoreA.concat("-All");
             } else {
-                for (int i = 1; i < 3; i++) {
-                    if (i == 1) tempScore = m_score1;
-                    else {
-                        score += "-";
-                        tempScore = m_score2;
-                    }
-                    switch (tempScore) {
-                        case 0:
-                            score += "Love";
-                            break;
-                        case 1:
-                            score += "Fifteen";
-                            break;
-                        case 2:
-                            score += "Thirty";
-                            break;
-                        case 3:
-                            score += "Forty";
-                            break;
-                    }
-                }
+                return scoreA.concat("-").concat(scoreB);
             }
         }
         return score;
@@ -107,5 +82,13 @@ public class TennisGame1 implements TennisGame {
             return true;
         }
         return false;
+    }
+
+    public String convertScoreToString(int score) {
+        if (score == 0) return "Love";
+        if (score == 1) return "Fifteen";
+        if (score == 2) return "Thirty";
+        if (score == 3) return "Forty";
+        return "";
     }
 }
