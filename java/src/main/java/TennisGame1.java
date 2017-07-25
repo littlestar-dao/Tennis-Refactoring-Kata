@@ -22,10 +22,8 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         String score = "";
         int minusResult = m_score1 - m_score2;
-
-        if (m_score1 == 0 && m_score2 == 0) {
-            return "Love-All";
-        } else if (isDuece()) {
+        
+        if (isDuece()) {
             score = "Deuce";
         } else if (isAdvantage()) {
             if (minusResult == 1) {
@@ -41,11 +39,10 @@ public class TennisGame1 implements TennisGame {
             }
         } else if (normal()) {
             String scoreA = convertScoreToString(m_score1);
-            String scoreB = convertScoreToString(m_score2);
             if (m_score1 == m_score2) {
                 return scoreA.concat("-All");
             } else {
-                return scoreA.concat("-").concat(scoreB);
+                return scoreA.concat("-").concat(convertScoreToString(m_score2));
             }
         }
         return score;
