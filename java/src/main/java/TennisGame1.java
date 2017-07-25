@@ -13,7 +13,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
-        if ("player1".equals(playerName) )
+        if ("player1".equals(playerName))
             m_score1 += 1;
         else
             m_score2 += 1;
@@ -51,7 +51,7 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    public boolean isDuece() {
+    private boolean isDuece() {
         if (m_score1 == m_score2 && m_score1 >= 3 && m_score2 >= 3) {
             countDuece++;
             return true;
@@ -59,7 +59,7 @@ public class TennisGame1 implements TennisGame {
         return false;
     }
 
-    public boolean isAdvantage() {
+    private boolean isAdvantage() {
         if (m_score1 >= 4 || m_score2 >= 4) {
             int minusResult = m_score1 - m_score2;
             if (minusResult == 1 || minusResult == -1) {
@@ -69,26 +69,27 @@ public class TennisGame1 implements TennisGame {
         return false;
     }
 
-    public boolean isWinner() {
+    private boolean isWinner() {
         int minusResult = m_score1 - m_score2;
-        if (m_score1 >= 4 || m_score2 >= 4 && ((minusResult >= 2) || (minusResult <= -2))) {
-            return true;
-        }
-        return false;
+        return (m_score1 >= 4 || m_score2 >= 4 && ((minusResult >= 2) || (minusResult <= -2)));
     }
 
-    public boolean normal() {
-        if (countDuece <= 0) {
-            return true;
-        }
-        return false;
+    private boolean normal() {
+        return (countDuece <= 0);
     }
 
-    public String convertScoreToString(int score) {
-        if (score == 0) return "Love";
-        if (score == 1) return "Fifteen";
-        if (score == 2) return "Thirty";
-        if (score == 3) return "Forty";
-        return "";
+    private String convertScoreToString(int score) {
+        switch (score) {
+            case 0:
+                return "Love";
+            case 1:
+                return "Fifteen";
+            case 2:
+                return "Thirty";
+            case 3:
+                return "Forty";
+            default:
+                return "";
+        }
     }
 }
