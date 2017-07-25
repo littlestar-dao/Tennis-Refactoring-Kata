@@ -21,6 +21,7 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         String score = "";
         int tempScore = 0;
+        int minusResult = m_score1 - m_score2;
         if (m_score1 == 0 && m_score2 == 0) {
             return "Love-All";
 
@@ -30,13 +31,13 @@ public class TennisGame1 implements TennisGame {
             score = "Deuce";
 
         } else if (isAdvantage()) {
-            int minusResult = m_score1 - m_score2;
             if (minusResult == 1) score = "Advantage player1";
             else if (minusResult == -1) score = "Advantage player2";
+
+        } else if (isWinner()) {
+            if (minusResult >= 2) score = "Win for player1";
+            else score = "Win for player2";
         }
-//        } else if (isWinner()) {
-//
-//        }
 
 
         else if (m_score1 == m_score2) {
@@ -55,12 +56,6 @@ public class TennisGame1 implements TennisGame {
                     break;
 
             }
-        } else if (m_score1 >= 4 || m_score2 >= 4) {
-            int minusResult = m_score1 - m_score2;
-//            if (minusResult == 1) score = "Advantage player1";
-//            else if (minusResult == -1) score = "Advantage player2";
-            if (minusResult >= 2) score = "Win for player1";
-            else score = "Win for player2";
         } else {
             for (int i = 1; i < 3; i++) {
                 if (i == 1) tempScore = m_score1;
@@ -102,5 +97,12 @@ public class TennisGame1 implements TennisGame {
             }
         }
         return false;
+    }
+
+    public boolean isWinner(){
+        int minusResult = m_score1 - m_score2;
+        if (m_score1 >= 4 || m_score2 >= 4 && ((minusResult >= 2) || (minusResult <= -2))){
+            return true;
+        }return false;
     }
 }
